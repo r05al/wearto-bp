@@ -6,12 +6,17 @@ import { createDraft, updateDraft, updateClothingItem } from '../actions'
 
 class EditClothingItem extends Component {
 
-	// componentWillMount() {
-	// 	this.props.createDraft(this.props.card);	
-	// }
-	componentDidMount() {
-		this.props.createDraft(this.props.card);	
+	componentWillMount() {
+		this.props.createDraft(this.props.item);	
 	}
+
+	static propTypes = {
+		draft: PropTypes.object,
+		item: PropTypes.object,
+		createDraft: PropTypes.func.isRequired,
+		updateDraft: PropTypes.func.isRequired,
+		updateClothingItem: PropTypes.func.isRequired
+	};
 
 	handleChange(field, value) {
 		this.props.updateDraft(field, value);
@@ -19,7 +24,7 @@ class EditClothingItem extends Component {
 
 	handleSubmit(e) {
 		e.preventDefault();
-		this.props.updateClothingItem(this.props);
+		this.props.updateClothingItem(this.props.item, this.props.draft);
 		this.props.router.push('/');
 	}
 
@@ -38,14 +43,10 @@ class EditClothingItem extends Component {
 	}
 }
 
-EditClothingItem.PropTypes = {
-	itemCallbacks: PropTypes.object
-};
-
 const mapStateToProps = (state, ownProps) => (
   {
     draft: state.clothingItemDraft,
-    card: getClothingItem(state, ownProps.params.id)
+    item: getClothingItem(state, ownProps.params.id)
   }
 );
 
@@ -54,6 +55,5 @@ const mapDispatchToProps = ({
 	updateDraft,
 	updateClothingItem
 })
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(EditClothingItem);
