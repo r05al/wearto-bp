@@ -17,3 +17,20 @@ export const toggleList = (id) => ({
 	type: "TOGGLE_LIST",
 	id
 })
+
+export const createDraft = (item) => ({
+	type: "CREATE_DRAFT",
+	item
+})
+
+export const updateDraft = (field, value) => ({
+	type: "UPDATE_DRAFT",
+	field,
+	value
+})
+
+export const updateClothingItem = (item, itemDraft) => ({
+	type: "UPDATE_CLOTHING_ITEM",
+	item,
+	itemDraft
+})
