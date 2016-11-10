@@ -18,9 +18,23 @@ const clothingItems = (state = data.items, action) => {
     	itemIndex = getClothingItemIndex(state, action.item.id);
     	return update(state, {
     		[itemIndex]: {
-    			$set: action.item
+    			$set: action.itemDraft
     		}
     	});
+    case 'ADD_CLOTHING_ITEM':
+    	let item;
+    	if (action.itemDraft.href === undefined) {
+    	  item = Object.assign({}, 
+    	  	action.itemDraft, {href: "http://placehold.it/455x475"}
+    	  	);
+    	  return update(state, {
+    	  	$push: [item]
+    	  })
+    	} else {
+	    	return update(state, {
+	    		$push: [item] 
+	    	});
+    	}
 		default:
 			return state;
 	}
