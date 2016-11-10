@@ -2,6 +2,18 @@ import React, { Component, PropTypes } from 'react';
 
 class ClothingItemForm extends Component {
 
+	static propTypes = {
+		buttonLabel: PropTypes.string.isRequired,
+		draftItem: PropTypes.shape({
+			type: PropTypes.string,
+			title: PropTypes.string,
+			tags: PropTypes.string
+		}).isRequired,
+		handleChange: PropTypes.func.isRequired,
+		handleSubmit: PropTypes.func.isRequired,
+		handleClose: PropTypes.func.isRequired
+	};
+
 	handleChange(field, e) {
 		this.props.handleChange(field, e.target.value);
 	}
@@ -49,19 +61,6 @@ class ClothingItemForm extends Component {
 			</div>
 		);
 	}
-
 }
-
-ClothingItemForm.propTypes = {
-	buttonLabel: PropTypes.string.isRequired,
-	draftItem: PropTypes.shape({
-		type: PropTypes.string,
-		title: PropTypes.string,
-		tags: PropTypes.string
-	}).isRequired,
-	handleChange: PropTypes.func.isRequired,
-	handleSubmit: PropTypes.func.isRequired,
-	handleClose: PropTypes.func.isRequired
-};
 
 export default ClothingItemForm;
