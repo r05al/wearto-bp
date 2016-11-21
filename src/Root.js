@@ -8,6 +8,8 @@ import css from '../public/styles.css';
 import { Router, Route, browserHistory } from 'react-router';
 import NewClothingItem from './components/NewClothingItem';
 import EditClothingItem from './components/EditClothingItem';
+import NewLook from './components/NewLook';
+import EditLook from './components/EditLook';
 
 
 const store = createStore(reducer);
@@ -19,8 +21,10 @@ export default class Root extends Component {
     		<Provider store={store}>
     			<Router history={browserHistory}>
     				<Route path="/" component={App}>
-		    			<Route path="items/new" component={NewClothingItem} />
-		    			<Route path="items/:id/edit" component={EditClothingItem} />
+              <Route path="items/new" component={NewClothingItem} />
+              <Route path="items/:id/edit" component={EditClothingItem} />
+		    			<Route path="looks/new" component={NewLook} />
+		    			<Route path="looks/:id/edit" component={EditLook} />
 	    			</Route>
 	    		</Router>
     		</Provider>
