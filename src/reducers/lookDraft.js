@@ -1,8 +1,21 @@
-import data from '../data.json';
 import update from 'react-addons-update';
 
+const defaultLook = () => {
+  return {
+    "id" : "",
+    "title": "Configure your Look",
+    "description": "Select items and prepare yourself for what's coming",
+    "date": null,
+    "pieces": {
+                "jacket" : { "type": "jacket" },
+                "shirt" : { "type": "shirt" },
+                "pant" : { "type": "pant" },
+                "shoe" : { "type": "shoe" }
+              }
+  }
+};
 
-const lookDraft = (state = data.defaultLook, action) => {
+const lookDraft = (state = defaultLook(), action) => {
 	switch (action.type) {
 		case 'DESELECT_ITEM':
 			return update( state, {
