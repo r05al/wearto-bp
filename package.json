@@ -48,6 +48,7 @@
     "json-loader": "^0.5.4",
     "react": "^0.14.6",
     "react-addons-css-transition-group": "^15.3.2",
+    "react-datepicker": "^0.34.0",
     "react-dom": "^0.14.6",
     "react-router": "^3.0.0",
     "react-slick": "^0.14.5"

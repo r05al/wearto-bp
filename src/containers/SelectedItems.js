@@ -1,4 +1,4 @@
-import { connect } from 'react-redux';';'
+import { connect } from 'react-redux';
 import { deselect } from '../actions'
 import Look from '../components/Look';
 
