@@ -2,7 +2,7 @@ import data from '../data.json';
 import update from 'react-addons-update';
 
 
-const look = (state = data.defaultLook, action) => {
+const lookDraft = (state = data.defaultLook, action) => {
 	switch (action.type) {
 		case 'DESELECT_ITEM':
 			return update( state, {
@@ -24,8 +24,6 @@ const look = (state = data.defaultLook, action) => {
     	return update( state, {
     		date: { $set: action.date }
     	});
-		default:
-			return state;
     case 'UPDATE_CLOTHING_ITEM':
       if (state.pieces[action.item.type].id === action.item.id) {
         return update( state, {
@@ -34,7 +32,9 @@ const look = (state = data.defaultLook, action) => {
           }
         });
       }
+		default:
+			return state;
 	}
 }
 
-export default look;
+export default lookDraft;

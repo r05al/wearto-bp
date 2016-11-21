@@ -28,7 +28,7 @@ class App extends Component {
 
 const mapStateToProps = (state) => ({
 	clothingItems: state.clothingItems,
-	look: state.look,
+	look: state.lookDraft,
 	listItems: state.listItems,
 });
 

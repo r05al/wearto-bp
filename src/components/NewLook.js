@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import LookForm from './LookForm';
+import {} from '../actions';
 import moment from 'moment';
 import { connect } from 'react-redux';
 
@@ -38,7 +39,7 @@ class SaveLook extends Component {
 }
 
 const mapStateToProps = (state) => ({
-	look: state.look,
+	look: state.updateLookDraft,
 })
 
 

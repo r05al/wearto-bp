@@ -36,7 +36,7 @@ class SaveLook extends Component {
 }
 
 const mapStateToProps = (state) => ({
-	look: state.look,
+	look: state.lookDraft,
 })
 
 SaveLook.PropTypes = {

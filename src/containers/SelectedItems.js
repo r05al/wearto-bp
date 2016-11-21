@@ -11,7 +11,7 @@ const getSelectedItems = (items, action) => {
 
 
 const mapStateToProps = (state) => ({
-	look: state.look,
+	look: state.lookDraft,
 })
 
 const mapDispatchToProps = ({

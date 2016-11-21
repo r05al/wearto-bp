@@ -11,7 +11,7 @@ const getSelectedItems = (items, action) => {
 
 const mapStateToProps = (state) => ({
 	clothingItems: state.clothingItems,
-	look: state.look,
+	look: state.lookDraft,
 	listItems: state.listItems,
 })
 

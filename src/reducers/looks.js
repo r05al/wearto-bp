@@ -1,10 +1,12 @@
 import update from 'react-addons-update';
 
-const savedLooks = (state = [], action) => {
+const looks = (state = [], action) => {
 	switch (action.type) {
+		case 'ADD_LOOK':
+		  return state;
 		default:
 			return state;
 	}
 }
 
-export default savedLooks;
+export default looks;

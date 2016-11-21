@@ -26,14 +26,14 @@ class FilterOptions extends Component {
     let datedLooks;
     if (this.props.look.date) {
       let day = this.props.look.date.startOf('day');
-      datedLooks = this.props.savedLooks.filter((look) => look.date).filter((look) =>
+      datedLooks = this.props.looks.filter((look) => look.date).filter((look) =>
         look.date.format('L') === this.props.look.date.format('L')
       );
     } else {
-      datedLooks = this.props.savedLooks;
+      datedLooks = this.props.looks;
     }
 
-    let savedLooksSelection = datedLooks.map((look) => {
+    let looksSelection = datedLooks.map((look) => {
       return <option key={look.id} value={look.id}>{look.title}</option>
     });
 
@@ -54,7 +54,7 @@ class FilterOptions extends Component {
                   style={{ flex: "1"}}
                   onChange={this.props.handleSetLook.bind(this)}>
             <option value="">saved looks</option>
-            {savedLooksSelection}
+            {looksSelection}
           </select>
         </div>
 			</div>
@@ -64,8 +64,8 @@ class FilterOptions extends Component {
 
 const mapStateToProps = (state) => (
   {
-    look: state.look,
-    savedLooks: state.savedLooks,
+    look: state.lookDraft,
+    looks: state.looks,
   }
 )
 

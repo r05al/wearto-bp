@@ -1,16 +1,16 @@
 import { combineReducers } from 'redux';
 import clothingItemDraft from './clothingItemDraft';
 import clothingItems, * as fromClothingItems from './clothingItems';
-import look from './look';
+import lookDraft from './lookDraft';
 import listItems from './listItems';
-import savedLooks from './savedLooks';
+import looks from './looks';
 
 const wearToApp = combineReducers({
 	clothingItemDraft,
 	clothingItems,
-	look,
+	lookDraft,
 	listItems,
-	savedLooks,
+	looks,
 })
 
 export default wearToApp;
