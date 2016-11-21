@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import ClothingItemForm from './ClothingItemForm';
-import { updateDraft, addClothingItem } from '../actions'
+import { createDraft, updateDraft, addClothingItem } from '../actions'
 import { connect } from 'react-redux';
 
 class NewClothingItem extends Component {
@@ -9,6 +9,10 @@ class NewClothingItem extends Component {
 		draft: PropTypes.object.isRequired,
 		updateDraft: PropTypes.func.isRequired,
 		addClothingItem: PropTypes.func.isRequired
+	}
+
+	componentWillMount() {
+		this.props.createDraft(this.props.item);
 	}
 
 	handleChange(field, value) {
@@ -43,7 +47,8 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = {
 	updateDraft,
-	addClothingItem
+	addClothingItem,
+	createDraft,
 } 
 
 export default connect(mapStateToProps, mapDispatchToProps)(NewClothingItem);

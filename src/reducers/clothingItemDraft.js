@@ -12,10 +12,14 @@ const defaultDraftCard = () => {
 
 const clothingItemDraft = (state = defaultDraftCard(), action) => {
 	switch (action.type) {
-		case 'CREATE_DRAFT_OF_EXISTING':
-			return update(state, {
-				$set: action.item
-			});
+		case 'CREATE_DRAFT':
+			if (action.item) {			
+				return update(state, {
+					$set: action.item
+				});
+			} else {
+				return defaultDraftCard();
+			}
 		case 'UPDATE_DRAFT':
 			return update(state, {
 				[action.field]: {
