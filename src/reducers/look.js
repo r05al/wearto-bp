@@ -20,8 +20,20 @@ const look = (state = data.defaultLook, action) => {
           [action.item.type]: { $set: action.item }
         }
       });
+    case 'UPDATE_DATE':
+    	return update( state, {
+    		date: { $set: action.date }
+    	});
 		default:
 			return state;
+    case 'UPDATE_CLOTHING_ITEM':
+      if (state.pieces[action.item.type].id === action.item.id) {
+        return update( state, {
+          pieces: {
+            [action.item.type]: { $set: action.itemDraft }
+          }
+        });
+      }
 	}
 }
 
