@@ -3,12 +3,14 @@ import clothingItemDraft from './clothingItemDraft';
 import clothingItems, * as fromClothingItems from './clothingItems';
 import look from './look';
 import listItems from './listItems';
+import savedLooks from './savedLooks';
 
 const wearToApp = combineReducers({
 	clothingItemDraft,
 	clothingItems,
 	look,
 	listItems,
+	savedLooks,
 })
 
 export default wearToApp;
