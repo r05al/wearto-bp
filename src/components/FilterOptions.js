@@ -3,7 +3,7 @@ import DatePicker from 'react-datepicker';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import { getLook } from '../reducers';
-import { handleDateChange, setLook } from '../actions';
+import { updateDate, setLook } from '../actions';
 
 class FilterOptions extends Component {
   constructor() {
@@ -21,6 +21,10 @@ class FilterOptions extends Component {
     let lookId = e.target.value;
     let look = getLook(this.props.looks, lookId);
     this.props.setLook(look);
+  }
+
+  handleDateChange(e) {
+    this.props.updateDate(e);
   }
 
   render() {
@@ -49,7 +53,7 @@ class FilterOptions extends Component {
                       popoverAttachment='bottom center'
                       popoverTargetAttachment='top center'
                       popoverTargetOffset='10px 50px'
-                      onChange={this.props.handleDateChange.bind(this)} 
+                      onChange={this.handleDateChange.bind(this)} 
                       style={{ flex: "2"}}/>
           <select id="savedLook"
                   value={this.props.look.id}
@@ -72,7 +76,7 @@ const mapStateToProps = (state) => (
 )
 
 const mapDispatchToProps = ({
-  handleDateChange,
+  updateDate,
   setLook
 })
 

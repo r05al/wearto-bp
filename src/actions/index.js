@@ -9,7 +9,6 @@ import {
 	ADD_CLOTHING_ITEM,
 	UPDATE_DATE,
 	SET_LOOK,
-	CREATE_LOOK_DRAFT,
 	UPDATE_LOOK_DRAFT,
 	ADD_LOOK,
 	UPDATE_LOOK
@@ -57,18 +56,13 @@ export const addClothingItem = (itemDraft) => ({
 	itemDraft
 })
 
-export const handleDateChange = (date) => ({
+export const updateDate = (date) => ({
 	type: UPDATE_DATE,
 	date
 })
 
 export const setLook = (look) => ({
 	type: SET_LOOK,
-	look
-})
-
-export const createLookDraft = (look) => ({
-	type: CREATE_LOOK_DRAFT,
 	look
 })
 

@@ -1,5 +1,5 @@
 import update from 'react-addons-update';
-import TOGGLE_LIST from '../constants';
+import { TOGGLE_LIST } from '../constants';
 
 const initialState = {
 	"jacket": false,

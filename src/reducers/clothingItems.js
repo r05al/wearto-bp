@@ -1,4 +1,4 @@
-import data from '../data.json';
+import { items } from '../data.json';
 import update from 'react-addons-update';
 import {
   TOGGLE_ITEM,
@@ -8,7 +8,7 @@ import {
 
 let itemIndex;
 
-const clothingItems = (state = data.items, action) => {
+const clothingItems = (state = items, action) => {
 	switch (action.type) {
 		case TOGGLE_ITEM:
 			itemIndex = state.findIndex((piece) => piece.id == action.item.id);
