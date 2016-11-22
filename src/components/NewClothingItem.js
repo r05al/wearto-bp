@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import ClothingItemForm from './ClothingItemForm';
-import { createDraft, updateDraft, addClothingItem } from '../actions'
+import { createDraft, updateDraft, addClothingItem } from '../actions';
 import { connect } from 'react-redux';
 
 class NewClothingItem extends Component {
@@ -12,7 +12,7 @@ class NewClothingItem extends Component {
 	}
 
 	componentWillMount() {
-		this.props.createDraft(this.props.item);
+		this.props.createDraft();
 	}
 
 	handleChange(field, value) {
@@ -42,8 +42,7 @@ class NewClothingItem extends Component {
 
 const mapStateToProps = (state) => ({
     draft: state.clothingItemDraft
-  }
-);
+ });
 
 const mapDispatchToProps = {
 	updateDraft,
