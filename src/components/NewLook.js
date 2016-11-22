@@ -1,10 +1,10 @@
 import React, { Component, PropTypes } from 'react';
 import LookForm from './LookForm';
-import {} from '../actions';
+import { updateLookDraft, addLook } from '../actions';
 import moment from 'moment';
 import { connect } from 'react-redux';
 
-class SaveLook extends Component {
+class NewLook extends Component {
 
 	static propTypes = {
 		look: PropTypes.object.isRequired,
@@ -27,7 +27,6 @@ class SaveLook extends Component {
 	}
 
 	render() {
-		debugger;
 		return (
 			<LookForm draftLook={this.props.look}
 								buttonLabel="Save Look"
@@ -39,12 +38,12 @@ class SaveLook extends Component {
 }
 
 const mapStateToProps = (state) => ({
-	look: state.updateLookDraft,
-})
+	look: state.lookDraft,
+});
 
+const mapDispatchToProps = {
+	updateLookDraft,
+	addLook
+}
 
-SaveLook.PropTypes = {
-	lookCallbacks: PropTypes.object
-};
-
-export default connect(mapStateToProps)(SaveLook);
+export default connect(mapStateToProps, mapDispatchToProps)(NewLook);
