@@ -45,12 +45,28 @@ export const handleDateChange = (date) => ({
 	date
 })
 
-export const handleSetLook = () => ({
-	type: "HANDLE_SET_LOOK",
+export const setLook = (look) => ({
+	type: "SET_LOOK",
+	look
+})
+
+export const createLookDraft = (look) => ({
+	type: "CREATE_LOOK_DRAFT",
+	look
 })
 
 export const updateLookDraft = (field, value) => ({
 	type: "UPDATE_LOOK_DRAFT",
 	field,
 	value
+})
+
+export const addLook = (lookDraft) => ({
+	type: "ADD_LOOK",
+	lookDraft
+})
+
+export const updateLook = (lookDraft) => ({
+	type: "UPDATE_LOOK",
+	lookDraft
 })
