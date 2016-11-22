@@ -1,13 +1,15 @@
 import React, { Component, PropTypes } from 'react';
 import LookForm from './LookForm';
+import { connect } from 'react-redux';
 import moment from 'moment';
+import { updateLookDraft, updateLook } from '../actions';
 
-class SaveLook extends Component {
+class EditLook extends Component {
 
 	static propTypes = {
-		look: PropTypes.object.isRequired,
+		lookDraft: PropTypes.object.isRequired,
 		updateLookDraft: PropTypes.func.isRequired,
-		addLook: PropTypes.func.isRequired
+		updateLook: PropTypes.func.isRequired
 	}
 
 	handleChange(field, value) {
@@ -16,7 +18,7 @@ class SaveLook extends Component {
 
 	handleSubmit(e) {
 		e.preventDefault();
-		this.props.addLook(this.props.look);
+		this.props.updateLook(this.props.lookDraft);
 		this.props.router.push('/');
 	}
 
@@ -26,7 +28,7 @@ class SaveLook extends Component {
 
 	render() {
 		return (
-			<LookForm draftLook={this.props.look}
+			<LookForm draftLook={this.props.lookDraft}
 								buttonLabel="Save Look"
 								handleChange={this.handleChange.bind(this)}
 								handleSubmit={this.handleSubmit.bind(this)}
@@ -36,11 +38,12 @@ class SaveLook extends Component {
 }
 
 const mapStateToProps = (state) => ({
-	look: state.lookDraft,
+	lookDraft: state.lookDraft,
 })
 
-SaveLook.PropTypes = {
-	lookCallbacks: PropTypes.object
-};
+const mapDispatchToProps = ({
+	updateLookDraft,
+	updateLook
+})
 
-export default SaveLook;
+export default connect(mapStateToProps, mapDispatchToProps)(EditLook);
