@@ -1,23 +1,10 @@
-import {
-	deselect,
-	select,
-	toggleItem,
-	toggleList,
-	createDraft,
-	updateDraft,
-	updateClothingItem,
-	addClothingItem,
-	updateDate,
-	setLook,
-	updateLookDraft,
-	addLook,
-	updateLook
-} from '../actions';
+import * as actions from '../actions';
+import * as types from '../constants';
 import { items } from '../data.json';
 
 describe('actions', function() {
-	let testItem = items[0];
-	let testItemDraft = items[1];
+	const testItem = items[0];
+	const testItemDraft = items[1];
 	const defaultLook = () => {
 	  return {
 	    "id" : null,
@@ -34,144 +21,144 @@ describe('actions', function() {
 	};
 
 	describe('deselect', function() {
-		it('should have type DESELECT_ITEM', function() {
-			expect(deselect().type).toEqual("DESELECT_ITEM");
-		});
-
-		it('should pass on the item', function() {
-			expect(deselect(testItem).item).toEqual(testItem);
+		it('should create an action to deselect an item', function() {
+			const expectedAction = {
+				type: types.DESELECT_ITEM,
+				item: testItem
+			}
+			expect(actions.deselect(testItem)).toEqual(expectedAction);
 		});
 	});
 
 	describe('select', function() {
-		it('should have type SELECT_ITEM', function() {
-			expect(select().type).toEqual("SELECT_ITEM");
-		});
-
-		it('should pass on the item', function() {
-			expect(select(testItem).item).toEqual(testItem);
+		it('should create an action to select an item', function() {
+			const expectedAction = {
+				type: types.SELECT_ITEM,
+				item: testItem
+			}
+			expect(actions.select(testItem)).toEqual(expectedAction);
 		});
 	});
 
 	describe('toggleItem', function() {
-		it('should have type TOGGLE_ITEM', function() {
-			expect(toggleItem().type).toEqual("TOGGLE_ITEM");
-		});
-
-		it('should pass on the item', function() {
-			expect(toggleItem(testItem).item).toEqual(testItem);
+		it('should create an action to toggle an item', function() {
+			const expectedAction = {
+				type: types.TOGGLE_ITEM,
+				item: testItem
+			}
+			expect(actions.toggleItem(testItem)).toEqual(expectedAction);
 		});
 	});
 
 	describe('toggleList', function() {
-		it('should have a type TOGGLE_LIST', function() {
-			expect(toggleList().type).toEqual("TOGGLE_LIST");
-		});
-
-		it('should pass on the id', function() {
-			var id = 11;
-			expect(toggleList(id).id).toEqual(id);
+		it('should create an action to toggle a list', function() {
+			const id = 1
+			const expectedAction = {
+				type: types.TOGGLE_LIST,
+				id
+			}
+			expect(actions.toggleList(id)).toEqual(expectedAction);
 		});
 	});
 
 	describe('createDraft', function() {
-		it('should have a type CREATE_DRAFT', function() {
-			expect(createDraft().type).toEqual("CREATE_DRAFT");
-		});
-
-		it('should pass on the item', function() {
-			expect(createDraft(testItem).item).toEqual(testItem);
+		it('should create an action to create a draft item', function() {
+			const expectedAction = {
+				type: types.CREATE_DRAFT,
+				item: testItem
+			}
+			expect(actions.createDraft(testItem)).toEqual(expectedAction);
 		});
 	});
 
 	describe('updateDraft', function() {
-		it('should have a type UPDATE_DRAFT', function() {
-			expect(updateDraft().type).toEqual("UPDATE_DRAFT");
-		});
-
-		it('should pass on the field and value', function() {
-			var field = "title";
-			var value = "Titleist";
-			expect(updateDraft(field, value).field).toEqual("title");
-			expect(updateDraft(field, value).value).toEqual("Titleist");
+		it('should create an action to update a draft item', function() {
+			const field = "title";
+			const value = "Updated Title";
+			const expectedAction = {
+				type: types.UPDATE_DRAFT,
+				field,
+				value
+			}
+			expect(actions.updateDraft(field, value)).toEqual(expectedAction);
 		});
 	});
 
 	describe('updateClothingItem', function() {
-		it('should have a type UPDATE_CLOTHING_ITEM', function() {
-			expect(updateClothingItem().type).toEqual("UPDATE_CLOTHING_ITEM");
-		});
-
-		it('should pass on the item and itemDraft', function() {
-			expect(updateClothingItem(testItem, testItemDraft).item).toEqual(testItem);
-			expect(updateClothingItem(testItem, testItemDraft).itemDraft).toEqual(testItemDraft);
+		it('should create an action to update a clothing item', function() {
+			const expectedAction = {
+				type: types.UPDATE_CLOTHING_ITEM,
+				item: testItem,
+				itemDraft: testItemDraft
+			}
+			expect(actions.updateClothingItem(testItem, testItemDraft)).toEqual(expectedAction);
 		});
 	});
 
 	describe('addClothingItem', function() {
-		it('should have a type ADD_CLOTHING_ITEM', function() {
-			expect(addClothingItem().type).toEqual("ADD_CLOTHING_ITEM");
-		});
-
-		it('should pass on the itemDraft', function() {
-			expect(addClothingItem(testItemDraft).itemDraft).toEqual(testItemDraft);
+		it('should create an action to add a clothing item', function() {
+			const expectedAction = {
+				type: types.ADD_CLOTHING_ITEM,
+				itemDraft: testItemDraft
+			}
+			expect(actions.addClothingItem(testItemDraft)).toEqual(expectedAction);
 		});
 	});
 
 	describe('updateDate', function() {
-		it('should have a type UPDATE_DATE', function() {
-			expect(updateDate().type).toEqual("UPDATE_DATE");
-		});
-
-		it('should pass on the date', function() {
-			var date = Date.now();
-			expect(updateDate(date).date).toEqual(date);
+		it('should create an action to update the date', function() {
+			const date = Date.now();
+			const expectedAction = {
+				type: types.UPDATE_DATE,
+				date
+			}
+			expect(actions.updateDate(date)).toEqual(expectedAction);
 		});
 	});
 
 	describe('setLook', function() {
-		it('should have a type SET_LOOK', function() {
-			expect(setLook().type).toEqual("SET_LOOK");
-		});
-
-		it('should pass on the look', function() {
-			var look = defaultLook();
-			expect(setLook(look).look).toEqual(look);
+		it('should create an action to set a look', function() {
+			const look = defaultLook();
+			const expectedAction = {
+				type: types.SET_LOOK,
+				look
+			}
+			expect(actions.setLook(look)).toEqual(expectedAction);
 		});
 	});
 
 	describe('updateLookDraft', function() {
-		it('should have a type of', function() {
-			expect(updateLookDraft().type).toEqual("UPDATE_LOOK_DRAFT");
-		});
-
-		it('should pass on the field and value', function() {
-			var field = "title";
-			var value = "Titleist";
-			expect(updateLookDraft(field, value).field).toEqual(field);
-			expect(updateLookDraft(field, value).value).toEqual(value);
+		it('should create an action to update a look draft', function() {
+			const field = "title";
+			const value = "Updated Title";
+			const expectedAction = {
+				type: types.UPDATE_LOOK_DRAFT,
+				field,
+				value
+			}
+			expect(actions.updateLookDraft(field, value)).toEqual(expectedAction);
 		});
 	});
 
 	describe('addLook', function() {
-		it('should have a type of', function() {
-			expect(addLook().type).toEqual("ADD_LOOK");
-		});
-
-		it('should pass on the lookDraft', function() {
-			var lookDraft = defaultLook();
-			expect(addLook(lookDraft).lookDraft).toEqual(lookDraft);
+		it('should create an action to add a look', function() {
+			const lookDraft = defaultLook();
+			const expectedAction = {
+				type: types.ADD_LOOK,
+				lookDraft
+			}
+			expect(actions.addLook(lookDraft)).toEqual(expectedAction);
 		});
 	});
 
 	describe('updateLook', function() {
-		it('should have a type of', function() {
-			expect(updateLook().type).toEqual("UPDATE_LOOK");
-		});
-
-		it('should pass on the lookDraft', function() {
-			var lookDraft = defaultLook();
-			expect(updateLook(lookDraft).lookDraft).toEqual(lookDraft);
+		it('should create an action to update a look', function() {
+			const lookDraft = defaultLook();
+			const expectedAction = {
+				type: types.UPDATE_LOOK,
+				lookDraft
+			}
+			expect(actions.updateLook(lookDraft)).toEqual(expectedAction);
 		});
 	});
 });
