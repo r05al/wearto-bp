@@ -2,7 +2,7 @@ import update from 'react-addons-update';
 
 const defaultLook = () => {
   return {
-    "id" : "",
+    "id" : null,
     "title": "Configure your Look",
     "description": "Select items and prepare yourself for what's coming",
     "date": null,
@@ -27,6 +27,14 @@ const lookDraft = (state = defaultLook(), action) => {
           }
         }
 			});
+    case 'SET_LOOK':
+      if (action.look) {      
+        return update(state, { 
+          $set: action.look 
+        });
+      } else {
+        return defaultLook();
+      }
 		case 'SELECT_ITEM':
 			return update( state, {
 				pieces: {
@@ -45,9 +53,16 @@ const lookDraft = (state = defaultLook(), action) => {
           }
         });
       }
+      case 'UPDATE_LOOK_DRAFT':
+        return update(state, {
+          [action.field]: {
+            $set: action.value
+          }
+        })
 		default:
 			return state;
 	}
 }
+
 
 export default lookDraft;
