@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import DatePicker from 'react-datepicker';
 import { Link } from 'react-router';
-import { handleDateChange, handleSetLook } from '../actions';
 import { connect } from 'react-redux';
+import { getLook } from '../reducers';
+import { handleDateChange, setLook } from '../actions';
 
 class FilterOptions extends Component {
   constructor() {
@@ -18,7 +19,8 @@ class FilterOptions extends Component {
 
   handleSetLook(e) {
     let lookId = e.target.value;
-    this.props.lookCallbacks.setLook(lookId);
+    let look = getLook(this.props.looks, lookId);
+    this.props.setLook(look);
   }
 
   render() {
@@ -52,8 +54,8 @@ class FilterOptions extends Component {
           <select id="savedLook"
                   value={this.props.look.id}
                   style={{ flex: "1"}}
-                  onChange={this.props.handleSetLook.bind(this)}>
-            <option value="">saved looks</option>
+                  onChange={this.handleSetLook.bind(this)}>
+            <option value="">Build a Look</option>
             {looksSelection}
           </select>
         </div>
@@ -71,7 +73,7 @@ const mapStateToProps = (state) => (
 
 const mapDispatchToProps = ({
   handleDateChange,
-  handleSetLook
+  setLook
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(FilterOptions);
