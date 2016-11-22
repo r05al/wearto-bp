@@ -1,4 +1,8 @@
 import update from 'react-addons-update';
+import {
+	CREATE_DRAFT,
+	UPDATE_DRAFT
+} from '../constants';
 
 const defaultDraftCard = () => {
   return {
@@ -12,7 +16,7 @@ const defaultDraftCard = () => {
 
 const clothingItemDraft = (state = defaultDraftCard(), action) => {
 	switch (action.type) {
-		case 'CREATE_DRAFT':
+		case CREATE_DRAFT:
 			if (action.item) {			
 				return update(state, {
 					$set: action.item
@@ -20,7 +24,7 @@ const clothingItemDraft = (state = defaultDraftCard(), action) => {
 			} else {
 				return defaultDraftCard();
 			}
-		case 'UPDATE_DRAFT':
+		case UPDATE_DRAFT:
 			return update(state, {
 				[action.field]: {
 					$set: action.value

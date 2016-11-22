@@ -1,4 +1,5 @@
 import update from 'react-addons-update';
+import TOGGLE_LIST from '../constants';
 
 const initialState = {
 	"jacket": false,
@@ -9,7 +10,7 @@ const initialState = {
 
 const listItems = (state = initialState, action) => {
 	switch (action.type) {
-		case "TOGGLE_LIST":
+		case TOGGLE_LIST:
 			return update( state, {
         [action.id]: { $set: !state[action.id] }
       });

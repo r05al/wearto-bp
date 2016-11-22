@@ -1,11 +1,16 @@
 import data from '../data.json';
 import update from 'react-addons-update';
+import {
+  TOGGLE_ITEM,
+  ADD_CLOTHING_ITEM,
+  UPDATE_CLOTHING_ITEM
+} from '../constants';
 
 let itemIndex;
 
 const clothingItems = (state = data.items, action) => {
 	switch (action.type) {
-		case "TOGGLE_ITEM":
+		case TOGGLE_ITEM:
 			itemIndex = state.findIndex((piece) => piece.id == action.item.id);
 			return update( state, {
 	      [itemIndex]: {
@@ -14,7 +19,7 @@ const clothingItems = (state = data.items, action) => {
           }
         }
       });
-    case 'ADD_CLOTHING_ITEM':
+    case ADD_CLOTHING_ITEM:
     	let item;
     	if (action.itemDraft.href === undefined) {
     	  item = Object.assign({}, 
@@ -28,7 +33,7 @@ const clothingItems = (state = data.items, action) => {
 	    		$push: [action.itemDraft] 
 	    	});
     	}
-    case 'UPDATE_CLOTHING_ITEM':
+    case UPDATE_CLOTHING_ITEM:
         itemIndex = getClothingItemIndex(state, action.item.id);
         return update(state, {
           [itemIndex]: {
