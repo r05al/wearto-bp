@@ -16,10 +16,10 @@ const wearToApp = combineReducers({
 export default wearToApp;
 
 export const getClothingItem = (state, id) =>
-	fromClothingItems.getClothingItem(state.clothingItems, id);
+	fromClothingItems.getClothingItem(state, id);
 
 export const getClothingItemIndex = (state, id) =>
-	fromClothingItems.getClothingItemIndex(state.clothingItems, id);
+	fromClothingItems.getClothingItemIndex(state, id);
 
 export const getLook = (state, id) =>
 	fromLooks.getLook(state, id);

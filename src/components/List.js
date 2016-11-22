@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from 'react';
-import Item from './Item'
 import Slider from 'react-slick';
 import { Link } from 'react-router';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';

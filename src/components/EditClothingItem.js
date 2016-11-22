@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import ClothingItemForm from './ClothingItemForm';
 import { connect } from 'react-redux';
 import { getClothingItem } from '../reducers';
-import { createDraft, updateDraft, updateClothingItem } from '../actions'
+import { createDraft, updateDraft, updateClothingItem } from '../actions';
 
 class EditClothingItem extends Component {
 
@@ -46,7 +46,7 @@ class EditClothingItem extends Component {
 const mapStateToProps = (state, ownProps) => (
   {
     draft: state.clothingItemDraft,
-    item: getClothingItem(state, ownProps.params.id)
+    item: getClothingItem(state.clothingItemDraft, ownProps.params.id)
   }
 );
 

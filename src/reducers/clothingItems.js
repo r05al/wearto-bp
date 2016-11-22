@@ -6,7 +6,7 @@ let itemIndex;
 const clothingItems = (state = data.items, action) => {
 	switch (action.type) {
 		case "TOGGLE_ITEM":
-			let itemIndex = state.findIndex((piece) => piece.id == action.item.id);
+			itemIndex = state.findIndex((piece) => piece.id == action.item.id);
 			return update( state, {
 	      [itemIndex]: {
           available: {
@@ -14,13 +14,6 @@ const clothingItems = (state = data.items, action) => {
           }
         }
       });
-    case 'UPDATE_CLOTHING_ITEM':
-    	itemIndex = getClothingItemIndex(state, action.item.id);
-    	return update(state, {
-    		[itemIndex]: {
-    			$set: action.itemDraft
-    		}
-    	});
     case 'ADD_CLOTHING_ITEM':
     	let item;
     	if (action.itemDraft.href === undefined) {
@@ -29,12 +22,19 @@ const clothingItems = (state = data.items, action) => {
     	  	);
     	  return update(state, {
     	  	$push: [item]
-    	  })
+    	  });
     	} else {
 	    	return update(state, {
-	    		$push: [item] 
+	    		$push: [action.itemDraft] 
 	    	});
     	}
+    case 'UPDATE_CLOTHING_ITEM':
+        itemIndex = getClothingItemIndex(state, action.item.id);
+        return update(state, {
+          [itemIndex]: {
+            $set: action.itemDraft
+          }
+        });
 		default:
 			return state;
 	}
