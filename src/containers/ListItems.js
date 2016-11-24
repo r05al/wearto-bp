@@ -1,15 +1,14 @@
 import { connect } from 'react-redux';
 import List from '../components/List';
-import { select, toggleItem, toggleList } from '../actions';
+import { selectItem, toggleItem, toggleList } from '../actions';
 
 const mapStateToProps = (state) => ({
 	clothingItems: state.clothingItems,
-	look: state.lookDraft,
 	listItems: state.listItems,
 })
 
 const mapDispatchToProps = ({
-	select,
+	selectItem,
 	toggleItem,
 	toggleList,
 })

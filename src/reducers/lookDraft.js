@@ -10,7 +10,7 @@ import {
 
 const defaultLook = () => {
   return fromJS({
-    "id" : null,
+    "id" : "",
     "title": "Configure your Look",
     "description": "Select items and prepare yourself for what's coming",
     "date": null,
@@ -38,8 +38,8 @@ const lookDraft = (state = defaultLook(), action) => {
     case UPDATE_DATE:
       return state.set('date', action.date);
     case UPDATE_CLOTHING_ITEM:
-      if state.pieces.includes(action.id) {
-        return state.setIn(['pieces', action.item.get('type')], action.itemDraft)
+      if (state.get('pieces').includes(action.id)) {
+        return state.setIn(['pieces', action.itemDraft.get('type')], action.id)
       }
     case UPDATE_LOOK_DRAFT:
       return state.set(action.field, action.value);

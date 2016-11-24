@@ -1,49 +1,64 @@
 import React, { Component, PropTypes } from 'react';
-import Item from './Item'
+import { Map, List } from 'immutable';
 import { Link } from 'react-router';
+import { getClothingItem } from '../reducers';
 
 class Look extends Component {
+  static propTypes = {
+    clothingItems: PropTypes.instanceOf(List).isRequired,
+    look: PropTypes.instanceOf(Map).isRequired,
+    deselect: PropTypes.func.isRequired
+  };
+
+  handleDeselect(item) {
+    const itemType = item.get('type');
+    this.props.deselect(itemType);
+  }
+
   render() {
+    const { look, clothingItems } = this.props;
+    const id = look.get('id');
+    const pieces = look.get('pieces');
+    const types = pieces.keySeq();
 
-    let { jacket, shirt, pant, shoe } = this.props.look.pieces
-
-    let pieces = [jacket, shirt, pant, shoe].map((item) => {
-    	let info;
-      if (item.href && item.href.includes('placehold.it')) {
+    const lookArray = types.map((type) => {
+    	let info, itemInfo;
+      if (pieces.get(type)) {
+        itemInfo = getClothingItem(clothingItems, pieces.get(type));
+      } else {
+        itemInfo = Map();
+      }
+      const href = itemInfo.get('href');
+      if (href && href.includes('placehold.it')) {
         info = <span style={{textAlign: "center", width: "100%"}}>
-                {item.title}
+                {itemInfo.get('title')}
                </span>;
       }
-    	return <div className="look-grid" key={item.type}
-									onClick={ this.props.deselect.bind(null, item) }>
-                <img src={item.href} />
+    	return <div className="look-grid" key={type}
+									onClick={ this.handleDeselect.bind(this, itemInfo) }>
+                <img src={href} />
 								{info}
 						 </div>
     });
 
     let edit;
-    if (this.props.look.id) {
-    	edit = <div className="look-edit"><Link to={`looks/${this.props.look.id}/edit`}>✎</Link></div>
+    if (id) {
+    	edit = <div className="look-edit"><Link to={`looks/${id}/edit`}>✎</Link></div>
     }
 
     return (
       <div className="look">
         <div className="look-description">
         	{ edit }
-        	<h2><strong>{this.props.look.title}</strong></h2>
-        	<p>{this.props.look.description}</p>
+        	<h2><strong>{look.get('title')}</strong></h2>
+        	<p>{look.get('description')}</p>
         </div>
         <div className="look-flex">
-	        { pieces }
+	        { lookArray }
 	      </div>
       </div>
     );
   }
-}
-
-Look.propTypes = {
-	look: PropTypes.object,
-	deselect: PropTypes.func
 }
 
 export default Look;

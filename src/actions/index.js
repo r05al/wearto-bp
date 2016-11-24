@@ -14,24 +14,25 @@ import {
 	UPDATE_LOOK
 } from '../constants';
 
-export const deselect = (item) => ({
+export const deselect = (itemType) => ({
 	type: DESELECT_ITEM,
-	item
+	itemType
 })
 
-export const select = (item) => ({
+export const selectItem = (itemType, id) => ({
 	type: SELECT_ITEM,
-	item
-})
-
-export const toggleItem = (item) => ({
-	type: TOGGLE_ITEM,
-	item
-})
-
-export const toggleList = (id) => ({
-	type: TOGGLE_LIST,
+	itemType, 
 	id
+})
+
+export const toggleItem = (id) => ({
+	type: TOGGLE_ITEM,
+	id
+})
+
+export const toggleList = (itemType) => ({
+	type: TOGGLE_LIST,
+	itemType
 })
 
 export const createDraft = (item) => ({
@@ -45,14 +46,14 @@ export const updateDraft = (field, value) => ({
 	value
 })
 
-export const updateClothingItem = (item, itemDraft) => ({
-	type: UPDATE_CLOTHING_ITEM,
-	item,
+export const addClothingItem = (itemDraft) => ({
+	type: ADD_CLOTHING_ITEM,
 	itemDraft
 })
 
-export const addClothingItem = (itemDraft) => ({
-	type: ADD_CLOTHING_ITEM,
+export const updateClothingItem = (id, itemDraft) => ({
+	type: UPDATE_CLOTHING_ITEM,
+	id,
 	itemDraft
 })
 
