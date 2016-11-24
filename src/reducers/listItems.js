@@ -1,19 +1,17 @@
-import update from 'react-addons-update';
+import { fromJS } from 'immutable';
 import { TOGGLE_LIST } from '../constants';
 
-const initialState = {
+const initialState = fromJS({
 	"jacket": false,
 	"shirt": false,
 	"pant": false,
 	"shoe": false
-}
+});
 
 const listItems = (state = initialState, action) => {
 	switch (action.type) {
 		case TOGGLE_LIST:
-			return update( state, {
-        [action.id]: { $set: !state[action.id] }
-      });
+			return state.update(action.id, value => !value);
 		default:
 			return state;
 	}
