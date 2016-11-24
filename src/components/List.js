@@ -42,9 +42,20 @@ class List extends Component {
 		return (!this.props.clothingItems.equals(nextProps.clothingItems) ||
 			!this.props.listItems.equals(nextProps.listItems));
 	}
+
+	handleSelect(item) {
+		const itemType = item.get('type');
+		const id = item.get('id');
+		this.props.selectItem(itemType, id);
+	}
 	
 	handleToggle() {
 		this.props.toggleList(this.props.type);
+	}
+
+	handleToggleItem(item) {
+		const id = item.get('id');
+		this.props.toggleItem(id);
 	}
 
 	render() {
@@ -69,7 +80,7 @@ class List extends Component {
   				id = item.get('id');
 
   			if (href.includes('placehold.it')) {
-  				info = <span onClick={ this.props.selectItem.bind(null, item) }
+  				info = <span onClick={ this.handleSelect.bind(this, item) }
 			  							 style={{position: "absolute", left: 0, 
 			  							 				 textAlign: "center", width: "100%"}}>
 			  					{item.get('title')}
@@ -80,11 +91,12 @@ class List extends Component {
 	  			<div className='clothing' key={ id }>
 	  				<div style={{width: "90%", margin: "0 auto"}}>
 		  				<img src={ href }
-									 onClick={ this.props.selectItem.bind(null, item) }
+									 onClick={ this.handleSelect.bind(this, item) }
 									 style={ item.get('available') ? {} : { filter: "opacity(50%)" }}/>
 							{ info }
 		  				<div className="item-edit"><Link to={`items/${id}/edit`}>✎</Link></div>
-		  				<div className="item-toggle" onClick={this.props.toggleItem.bind(null, item)}>&#9852;</div>
+		  				<div className="item-toggle" 
+		  						 onClick={this.handleToggleItem.bind(this, item)}>&#9852;</div>
 
 		  			</div>
 	  			</div>

@@ -24,7 +24,8 @@ class EditClothingItem extends Component {
 
 	handleSubmit(e) {
 		e.preventDefault();
-		this.props.updateClothingItem(this.props.item, this.props.draft);
+		const id = this.props.item.get('id');
+		this.props.updateClothingItem(id, this.props.draft);
 		this.props.router.push('/');
 	}
 

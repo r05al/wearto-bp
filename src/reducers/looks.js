@@ -1,25 +1,17 @@
-import update from 'react-addons-update';
+import { List } from 'immutable';
 import {
 	ADD_LOOK,
 	UPDATE_LOOK
 } from '../constants';
 
-const looks = (state = [], action) => {
+const looks = (state = List(), action) => {
 	switch (action.type) {
 		case ADD_LOOK:
-			let look = update(action.lookDraft, {
-				id: { $set: Date.now() }
-			});
-			return update(state, {
-				$push: [look]
-			});
+			const look = action.lookDraft.set('id', Date.now());
+			return state.push(look);
 		case UPDATE_LOOK:
-			let lookIndex = getLookIndex(state, action.lookDraft.id);
-			return update(state, {
-				[lookIndex]: {
-					$set: action.lookDraft
-				}
-			});
+			const lookIndex = getLookIndex(state, action.lookDraft.get('id'));
+			return state.set(lookIndex, action.lookDraft);
 		default:
 			return state;
 	}
@@ -27,5 +19,5 @@ const looks = (state = [], action) => {
 
 export default looks;
 
-export const getLook = (state, id) => state.find((look) => look.id == id);
-export const getLookIndex = (state, id) => state.findIndex((look) => look.id == id);
+export const getLook = (state, id) => state.find((look) => look.get('id') == id);
+export const getLookIndex = (state, id) => state.findIndex((look) => look.get('id') == id);

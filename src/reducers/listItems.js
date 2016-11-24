@@ -11,7 +11,7 @@ const initialState = fromJS({
 const listItems = (state = initialState, action) => {
 	switch (action.type) {
 		case TOGGLE_LIST:
-			return state.update(action.id, value => !value);
+			return state.update(action.itemType, value => !value);
 		default:
 			return state;
 	}

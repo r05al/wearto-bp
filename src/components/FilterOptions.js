@@ -18,28 +18,29 @@ class FilterOptions extends Component {
   }
 
   handleSetLook(e) {
-    let lookId = e.target.value;
-    let look = getLook(this.props.looks, lookId);
+    const lookId = e.target.value;
+    const look = getLook(this.props.looks, lookId);
     this.props.setLook(look);
   }
 
-  handleDateChange(e) {
-    this.props.updateDate(e);
+  handleDateChange(date) {
+    this.props.updateDate(date);
   }
 
   render() {
-
     let datedLooks;
-    if (this.props.look.date) {
-      let day = this.props.look.date.startOf('day');
-      datedLooks = this.props.looks.filter((look) => look.date).filter((look) =>
-        look.date.format('L') === this.props.look.date.format('L')
-      );
+    const {look, looks} = this.props;
+
+    if (look.get('date')) {
+      datedLooks = looks.filter((l) => l.get('date'))
+                    .filter((l) => 
+                      l.get('date').format('L') === look.get('date').format('L')
+                    );
     } else {
-      datedLooks = this.props.looks;
+      datedLooks = looks;
     }
 
-    let looksSelection = datedLooks.map((look) => {
+    const looksSelection = datedLooks.map((look) => {
       return <option key={look.id} value={look.id}>{look.title}</option>
     });
 
@@ -47,7 +48,7 @@ class FilterOptions extends Component {
 			<div className="filter-options">
         <div id="search" onClick={this.toggleFilter.bind(this)}>&#9740;</div>
         <div className={this.state.showFilter ? "search-options search-options--is-open":"search-options"}>
-          <DatePicker selected={this.props.look.date}
+          <DatePicker selected={look.get('date')}
                       isClearable={true}
                       placeholderText='Select a date to filter by'
                       popoverAttachment='bottom center'
@@ -56,7 +57,7 @@ class FilterOptions extends Component {
                       onChange={this.handleDateChange.bind(this)} 
                       style={{ flex: "2"}}/>
           <select id="savedLook"
-                  value={this.props.look.id}
+                  value={look.get('id')}
                   style={{ flex: "1"}}
                   onChange={this.handleSetLook.bind(this)}>
             <option value="">Build a Look</option>

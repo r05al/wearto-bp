@@ -1,68 +1,51 @@
-import update from 'react-addons-update';
+import { fromJS } from 'immutable';
+import {
+  DESELECT_ITEM,
+  SET_LOOK,
+  SELECT_ITEM,
+  UPDATE_DATE,
+  UPDATE_CLOTHING_ITEM,
+  UPDATE_LOOK_DRAFT
+} from '../constants';
 
 const defaultLook = () => {
-  return {
+  return fromJS({
     "id" : null,
     "title": "Configure your Look",
     "description": "Select items and prepare yourself for what's coming",
     "date": null,
     "pieces": {
-                "jacket" : { "type": "jacket" },
-                "shirt" : { "type": "shirt" },
-                "pant" : { "type": "pant" },
-                "shoe" : { "type": "shoe" }
+                "jacket" : 0,
+                "shirt" : 0,
+                "pant" : 0,
+                "shoe" : 0
               }
-  }
+  });
 };
 
 const lookDraft = (state = defaultLook(), action) => {
-	switch (action.type) {
-		case 'DESELECT_ITEM':
-			return update( state, {
-        pieces: {
-          [action.item.type]: {
-            $set: {
-                    "type": action.item.type
-                  }
-          }
-        }
-			});
-    case 'SET_LOOK':
-      if (action.look) {      
-        return update(state, { 
-          $set: action.look 
-        });
+  switch (action.type) {
+		case DESELECT_ITEM:
+      return state.setIn(['pieces', action.itemType], 0);
+    case SET_LOOK:
+      if (action.look) {
+        return state.set(action.look);  
       } else {
         return defaultLook();
       }
-		case 'SELECT_ITEM':
-			return update( state, {
-				pieces: {
-          [action.item.type]: { $set: action.item }
-        }
-      });
-    case 'UPDATE_DATE':
-    	return update( state, {
-    		date: { $set: action.date }
-    	});
-    case 'UPDATE_CLOTHING_ITEM':
-      if (state.pieces[action.item.type].id === action.item.id) {
-        return update( state, {
-          pieces: {
-            [action.item.type]: { $set: action.itemDraft }
-          }
-        });
+		case SELECT_ITEM:
+      return state.setIn(['pieces', action.itemType], action.id);
+    case UPDATE_DATE:
+      return state.set('date', action.date);
+    case UPDATE_CLOTHING_ITEM:
+      if state.pieces.includes(action.id) {
+        return state.setIn(['pieces', action.item.get('type')], action.itemDraft)
       }
-      case 'UPDATE_LOOK_DRAFT':
-        return update(state, {
-          [action.field]: {
-            $set: action.value
-          }
-        })
+    case UPDATE_LOOK_DRAFT:
+      return state.set(action.field, action.value);
 		default:
 			return state;
 	}
 }
-
 
 export default lookDraft;

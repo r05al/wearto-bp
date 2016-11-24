@@ -24,23 +24,24 @@ class ClothingItemForm extends Component {
 	}
 
 	render() {
+		const { draftItem, buttonLabel } = this.props
 		return (
 			<div>
 				<div className="item big">
 					<form onSubmit={this.props.handleSubmit.bind(this)}>
 						<input type='text'
-									 value={this.props.draftItem.title}
+									 value={draftItem.get('title')}
 									 onChange={this.handleChange.bind(this,'title')}
 									 placeholder="Product Name"
 									 required={true}
 									 autoFocus={true} /><br />
-						<textarea value={this.props.draftItem.tags}
+						<textarea value={draftItem.get('tags')}
 											onChange={this.handleChange.bind(this,'tags')}
 											placeholder="Description Tags"
 											required={true} /><br />
 						<label htmlFor="type">Type</label>
 						<select id="type"
-										value={this.props.draftItem.type}
+										value={draftItem.get('type')}
 										onChange={this.handleChange.bind(this,'type')}>
 							<option value="jacket">Jacket</option>
 							<option value="shirt">Shirt</option>
@@ -48,11 +49,11 @@ class ClothingItemForm extends Component {
 							<option value="shoe">Shoe</option>
 						</select><br />
 						<input type="text"
-									 value={this.props.draftItem.href}
+									 value={draftItem.get('href')}
 									 onChange={this.handleChange.bind(this,'href')}
 									 placeholder="image url" />
 						<div className="actions">
-							<button type="submit">{this.props.buttonLabel}</button>
+							<button type="submit">{buttonLabel}</button>
 						</div>
 					</form>
 				</div>

@@ -1,45 +1,25 @@
 import { items } from '../data.json';
-import update from 'react-addons-update';
+import { fromJS, Map } from 'immutable';
 import {
   TOGGLE_ITEM,
   ADD_CLOTHING_ITEM,
   UPDATE_CLOTHING_ITEM
 } from '../constants';
 
-let itemIndex;
+const initialState = fromJS(items);
 
-const clothingItems = (state = items, action) => {
+const clothingItems = (state = initialState, action) => {
+  let itemIndex;
 	switch (action.type) {
 		case TOGGLE_ITEM:
-			itemIndex = state.findIndex((piece) => piece.id == action.item.id);
-			return update( state, {
-	      [itemIndex]: {
-          available: {
-            $set: !action.item.available
-          }
-        }
-      });
+      itemIndex = getClothingItemIndex(state, action.id);
+      return state.updateIn([itemIndex, 'available'], value => !value);
     case ADD_CLOTHING_ITEM:
-    	let item;
-    	if (action.itemDraft.href === undefined) {
-    	  item = Object.assign({}, 
-    	  	action.itemDraft, {href: "http://placehold.it/455x475"}
-    	  	);
-    	  return update(state, {
-    	  	$push: [item]
-    	  });
-    	} else {
-	    	return update(state, {
-	    		$push: [action.itemDraft] 
-	    	});
-    	}
+      const item = Map({"href", "http://placehold.it/455x475"}).merge(action.itemDraft);
+      return state.push(item);
     case UPDATE_CLOTHING_ITEM:
-        itemIndex = getClothingItemIndex(state, action.item.id);
-        return update(state, {
-          [itemIndex]: {
-            $set: action.itemDraft
-          }
-        });
+      itemIndex = getClothingItemIndex(state, action.id);
+      return state.set(itemIndex, action.itemDraft);
 		default:
 			return state;
 	}
@@ -47,5 +27,5 @@ const clothingItems = (state = items, action) => {
 
 export default clothingItems;
 
-export const getClothingItem = (state, id) => state.find((item)=>item.id == id);
-export const getClothingItemIndex = (state, id) => state.findIndex((item)=>item.id == id);
+export const getClothingItem = (state, id) => state.find((item)=>item.get('id') == id);
+export const getClothingItemIndex = (state, id) => state.findIndex((item)=>item.get('id') == id);
