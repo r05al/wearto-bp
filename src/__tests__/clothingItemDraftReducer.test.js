@@ -1,4 +1,5 @@
 import reducer from '../reducers/clothingItemDraft';
+import { fromJS } from 'immutable';
 import * as types from '../constants';
 
 describe('clothingItems reducer', () => {
@@ -12,15 +13,15 @@ describe('clothingItems reducer', () => {
 	
 	it('should return initial state', () => {
 		const initState = reducer(undefined, {})
-		expect(initState).toEqual(
-			{
-			    id: initState.id,
+		expect(initState).toEqual(fromJS(
+				{
+			    id: initState.get('id'),
 			    title:'',
 			    tags:'',
 			    type:'jacket',
 			    available: true
-			  }
-			);
+				 }
+			));
 	});
 
 	it('should handle CREATE_DRAFT with no item passed', () => {
@@ -28,14 +29,15 @@ describe('clothingItems reducer', () => {
 				type: types.CREATE_DRAFT,
 				item: undefined
 			})
-		expect(state).toEqual(
-			{
-				id: state.id,
-				title:'',
-				tags:'',
-				type:'jacket',
-				available: true
-			}
+		expect(state).toEqual(fromJS(
+				{
+					id: state.get('id'),
+					title:'',
+					tags:'',
+					type:'jacket',
+					available: true
+				}
+			)
 		);
 	});
 
@@ -45,7 +47,7 @@ describe('clothingItems reducer', () => {
 				type: types.CREATE_DRAFT,
 				item: testItem
 			})
-		).toEqual(testItem);
+		).toEqual(fromJS(testItem));
 	});
 
 	it('should handle UPDATE_DRAFT', () => {
@@ -55,7 +57,7 @@ describe('clothingItems reducer', () => {
 				field: "title",
 				value: "Updated Title"
 			})
-		).toEqual(
+		).toEqual(fromJS(
 			{
 				id: testItem.id,
 				title:'Updated Title',
@@ -63,7 +65,7 @@ describe('clothingItems reducer', () => {
 				type:'jacket',
 				available: true
 			}
-		);
+		));
 	});
 
 });

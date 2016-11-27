@@ -24,19 +24,19 @@ describe('actions', function() {
 		it('should create an action to deselect an item', function() {
 			const expectedAction = {
 				type: types.DESELECT_ITEM,
-				item: testItem
+				itemType: testItem
 			}
 			expect(actions.deselect(testItem)).toEqual(expectedAction);
 		});
 	});
 
-	describe('select', function() {
+	describe('selectItem', function() {
 		it('should create an action to select an item', function() {
 			const expectedAction = {
 				type: types.SELECT_ITEM,
-				item: testItem
+				itemType: testItem
 			}
-			expect(actions.select(testItem)).toEqual(expectedAction);
+			expect(actions.selectItem(testItem)).toEqual(expectedAction);
 		});
 	});
 
@@ -44,7 +44,7 @@ describe('actions', function() {
 		it('should create an action to toggle an item', function() {
 			const expectedAction = {
 				type: types.TOGGLE_ITEM,
-				item: testItem
+				id: testItem
 			}
 			expect(actions.toggleItem(testItem)).toEqual(expectedAction);
 		});
@@ -52,12 +52,12 @@ describe('actions', function() {
 
 	describe('toggleList', function() {
 		it('should create an action to toggle a list', function() {
-			const id = 1
+			const itemType = "jacket";
 			const expectedAction = {
 				type: types.TOGGLE_LIST,
-				id
+				itemType
 			}
-			expect(actions.toggleList(id)).toEqual(expectedAction);
+			expect(actions.toggleList(itemType)).toEqual(expectedAction);
 		});
 	});
 
@@ -88,7 +88,7 @@ describe('actions', function() {
 		it('should create an action to update a clothing item', function() {
 			const expectedAction = {
 				type: types.UPDATE_CLOTHING_ITEM,
-				item: testItem,
+				id: testItem,
 				itemDraft: testItemDraft
 			}
 			expect(actions.updateClothingItem(testItem, testItemDraft)).toEqual(expectedAction);
