@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import ClothingItemForm from './ClothingItemForm';
+import ClothingItemForm from '../components/ClothingItemForm';
 import { connect } from 'react-redux';
 import { createDraft, updateDraft, addClothingItem } from '../actions';
 

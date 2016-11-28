@@ -1,13 +1,13 @@
 import React, { Component, PropTypes } from 'react';
-import ClothingItemForm from './ClothingItemForm';
+import ClothingItemForm from '../components/ClothingItemForm';
 import { connect } from 'react-redux';
 import { getClothingItem } from '../reducers';
 import { createDraft, updateDraft, updateClothingItem } from '../actions';
 
 class EditClothingItem extends Component {
 	static propTypes = {
-		draft: PropTypes.object,
-		item: PropTypes.object,
+		draft: PropTypes.object.isRequired,
+		item: PropTypes.object.isRequired,
 		createDraft: PropTypes.func.isRequired,
 		updateDraft: PropTypes.func.isRequired,
 		updateClothingItem: PropTypes.func.isRequired
@@ -46,6 +46,7 @@ class EditClothingItem extends Component {
 const mapStateToProps = (state, ownProps) => (
   {
     draft: state.clothingItemDraft,
+    action: getAction(ownProps.route.path),
     item: getClothingItem(state.clothingItems, ownProps.params.id)
   }
 );

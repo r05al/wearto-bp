@@ -1,15 +1,14 @@
 import React, { Component, PropTypes } from 'react';
-import LookForm from './LookForm';
-import { updateLookDraft, addLook } from '../actions';
+import LookForm from '../components/LookForm';
 import { connect } from 'react-redux';
+import { updateLookDraft, updateLook } from '../actions';
 
-class NewLook extends Component {
-
+class EditLook extends Component {
 	static propTypes = {
 		clothingItems: PropTypes.object.isRequired,
 		lookDraft: PropTypes.object.isRequired,
 		updateLookDraft: PropTypes.func.isRequired,
-		addLook: PropTypes.func.isRequired
+		updateLook: PropTypes.func.isRequired
 	}
 
 	handleChange(field, value) {
@@ -18,7 +17,7 @@ class NewLook extends Component {
 
 	handleSubmit(e) {
 		e.preventDefault();
-		this.props.addLook(this.props.lookDraft);
+		this.props.updateLook(this.props.lookDraft);
 		this.props.router.push('/');
 	}
 
@@ -41,11 +40,11 @@ class NewLook extends Component {
 const mapStateToProps = (state) => ({
 	clothingItems: state.clothingItems,
 	lookDraft: state.lookDraft,
-});
+})
 
-const mapDispatchToProps = {
+const mapDispatchToProps = ({
 	updateLookDraft,
-	addLook
-}
+	updateLook
+})
 
-export default connect(mapStateToProps, mapDispatchToProps)(NewLook);
+export default connect(mapStateToProps, mapDispatchToProps)(EditLook);
