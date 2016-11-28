@@ -26,10 +26,14 @@ const defaultLook = () => {
 const lookDraft = (state = defaultLook(), action) => {
   switch (action.type) {
 		case DESELECT_ITEM:
-      return state.setIn(['pieces', action.itemType], 0);
+      if (action.itemType) {
+        return state.setIn(['pieces', action.itemType], 0);
+      } else {
+        return state;
+      }
     case SET_LOOK:
       if (action.look) {
-        return state.set(action.look);  
+        return action.look;  
       } else {
         return defaultLook();
       }
