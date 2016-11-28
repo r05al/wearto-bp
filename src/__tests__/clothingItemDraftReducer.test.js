@@ -3,16 +3,16 @@ import { fromJS } from 'immutable';
 import * as types from '../constants';
 
 describe('clothingItems reducer', () => {
-	const testItem = {
+	const testItem = fromJS({
     id: Date.now(),
     title:'',
     tags:'',
     type:'jacket',
     available: true
-	};
+	});
 	
 	it('should return initial state', () => {
-		const initState = reducer(undefined, {})
+		const initState = reducer(undefined, {});
 		expect(initState).toEqual(fromJS(
 				{
 			    id: initState.get('id'),
@@ -47,19 +47,19 @@ describe('clothingItems reducer', () => {
 				type: types.CREATE_DRAFT,
 				item: testItem
 			})
-		).toEqual(fromJS(testItem));
+		).toEqual(testItem);
 	});
 
 	it('should handle UPDATE_DRAFT', () => {
 		expect(
 			reducer(testItem, {
 				type: types.UPDATE_DRAFT,
-				field: "title",
-				value: "Updated Title"
+				field: 'title',
+				value: 'Updated Title'
 			})
 		).toEqual(fromJS(
 			{
-				id: testItem.id,
+				id: testItem.get('id'),
 				title:'Updated Title',
 				tags:'',
 				type:'jacket',
@@ -67,5 +67,4 @@ describe('clothingItems reducer', () => {
 			}
 		));
 	});
-
 });

@@ -7,15 +7,15 @@ describe('actions', function() {
 	const testItemDraft = items[1];
 	const defaultLook = () => {
 	  return {
-	    "id" : null,
-	    "title": "Configure your Look",
-	    "description": "Select items and prepare yourself for what's coming",
-	    "date": null,
-	    "pieces": {
-	                "jacket" : 0,
-	                "shirt" : 0,
-	                "pant" : 0,
-	                "shoe" : 0
+	    'id' : null,
+	    'title': 'Configure your Look',
+	    'description': 'Select items and prepare yourself for what\'s coming',
+	    'date': null,
+	    'pieces': {
+	                'jacket' : 0,
+	                'shirt' : 0,
+	                'pant' : 0,
+	                'shoe' : 0
 	              }
 	  }
 	};
@@ -52,7 +52,7 @@ describe('actions', function() {
 
 	describe('toggleList', function() {
 		it('should create an action to toggle a list', function() {
-			const itemType = "jacket";
+			const itemType = 'jacket';
 			const expectedAction = {
 				type: types.TOGGLE_LIST,
 				itemType
@@ -73,8 +73,8 @@ describe('actions', function() {
 
 	describe('updateDraft', function() {
 		it('should create an action to update a draft item', function() {
-			const field = "title";
-			const value = "Updated Title";
+			const field = 'title';
+			const value = 'Updated Title';
 			const expectedAction = {
 				type: types.UPDATE_DRAFT,
 				field,
@@ -129,8 +129,8 @@ describe('actions', function() {
 
 	describe('updateLookDraft', function() {
 		it('should create an action to update a look draft', function() {
-			const field = "title";
-			const value = "Updated Title";
+			const field = 'title';
+			const value = 'Updated Title';
 			const expectedAction = {
 				type: types.UPDATE_LOOK_DRAFT,
 				field,
