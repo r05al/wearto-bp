@@ -1,12 +1,11 @@
 import React, { Component, PropTypes } from 'react';
 import LookForm from './LookForm';
 import { connect } from 'react-redux';
-import moment from 'moment';
 import { updateLookDraft, updateLook } from '../actions';
 
 class EditLook extends Component {
-
 	static propTypes = {
+		clothingItems: PropTypes.object.isRequired,
 		lookDraft: PropTypes.object.isRequired,
 		updateLookDraft: PropTypes.func.isRequired,
 		updateLook: PropTypes.func.isRequired
@@ -28,7 +27,8 @@ class EditLook extends Component {
 
 	render() {
 		return (
-			<LookForm draftLook={this.props.lookDraft}
+			<LookForm clothingItems={this.props.clothingItems}
+								lookDraft={this.props.lookDraft}
 								buttonLabel="Save Look"
 								handleChange={this.handleChange.bind(this)}
 								handleSubmit={this.handleSubmit.bind(this)}
@@ -38,6 +38,7 @@ class EditLook extends Component {
 }
 
 const mapStateToProps = (state) => ({
+	clothingItems: state.clothingItems,
 	lookDraft: state.lookDraft,
 })
 

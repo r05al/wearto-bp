@@ -1,8 +1,21 @@
 import React, { Component, PropTypes } from 'react';
 import DatePicker from 'react-datepicker';
-
+import { getClothingItem } from '../reducers';
 
 class LookForm extends Component {
+	static propTypes = {
+		buttonLabel: PropTypes.string.isRequired,
+		clothingItems: PropTypes.object.isRequired,
+		lookDraft: PropTypes.shape({
+			title: PropTypes.string,
+			description: PropTypes.string,
+			date: PropTypes.object,
+			pieces: PropTypes.object
+		}).isRequired,
+		handleChange: PropTypes.func.isRequired,
+		handleSubmit: PropTypes.func.isRequired,
+		handleClose: PropTypes.func.isRequired
+	};
 
 	handleChange(field, e) {
 		this.props.handleChange(field, e.target.value);
@@ -18,15 +31,17 @@ class LookForm extends Component {
 	}
 
 	render() {
+		const clothingItems = this.props.clothingItems;
+		const lookDraft = this.props.lookDraft;
+		const selectedPieces = lookDraft.get('pieces')
+			.filter((item) => item );
 
-		let pieces = this.props.draftLook.pieces;
-
-		let selectedPieces = Object.keys(pieces).filter((item) => {
-			return Boolean(pieces[item].id);
-		});
-
-		let images = selectedPieces.map((item) => {
-			return <div key={item} className="draft-img" style={{width: "20%"}}><img src={pieces[item].href}/></div>;
+		const images = selectedPieces.map((piece) => {
+			const item = getClothingItem(clothingItems, piece);
+			return <div key={piece} className="draft-img" 
+									style={{width: '20%'}}>
+							 <img src={item.get('href')}/>
+						 </div>;
 		});
 
 		return (
@@ -34,18 +49,18 @@ class LookForm extends Component {
 				<div className="item big">
 					<form onSubmit={this.props.handleSubmit.bind(this)}>
 						<input type='text'
-									 value={this.props.draftLook.title}
+									 value={lookDraft.get('title')}
 									 onChange={this.handleChange.bind(this,'title')}
 									 placeholder="Look Name"
 									 required={true}
 									 autoFocus={true} /><br />
-						<textarea value={this.props.draftLook.description}
+						<textarea value={lookDraft.get('description')}
 											onChange={this.handleChange.bind(this,'description')}
 											placeholder="Description" /><br />
 						<DatePicker placeholderText="Click to select a date"
 						            onChange={this.handleDate.bind(this, 'date')}
 						            isClearable={true}
-						            selected={this.props.draftLook.date} />
+						            selected={lookDraft.get('date')} />
             <div style={{display: 'flex'}}>
             	{ images }
             </div>
@@ -59,20 +74,6 @@ class LookForm extends Component {
 			</div>
 		);
 	}
-
 }
-
-LookForm.propTypes = {
-	buttonLabel: PropTypes.string.isRequired,
-	draftLook: PropTypes.shape({
-		title: PropTypes.string,
-		description: PropTypes.string,
-		date: PropTypes.object,
-		pieces: PropTypes.object
-	}).isRequired,
-	handleChange: PropTypes.func.isRequired,
-	handleSubmit: PropTypes.func.isRequired,
-	handleClose: PropTypes.func.isRequired
-};
 
 export default LookForm;
