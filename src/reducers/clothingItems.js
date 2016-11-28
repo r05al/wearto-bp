@@ -15,7 +15,7 @@ const clothingItems = (state = initialState, action) => {
       itemIndex = getClothingItemIndex(state, action.id);
       return state.updateIn([itemIndex, 'available'], value => !value);
     case ADD_CLOTHING_ITEM:
-      const item = Map({"href": "http://placehold.it/455x475"}).merge(action.itemDraft);
+      const item = Map({'href': 'http://placehold.it/455x475'}).merge(action.itemDraft);
       return state.push(item);
     case UPDATE_CLOTHING_ITEM:
       itemIndex = getClothingItemIndex(state, action.id);

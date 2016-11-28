@@ -7,9 +7,6 @@ import FilterOptions from '../components/FilterOptions';
 import 'react-datepicker/dist/react-datepicker.css';
 
 class App extends Component {
-	componentDidMount(){
-	  // this.props.fetchCards();
-	}
 
 	render() {
 		return(

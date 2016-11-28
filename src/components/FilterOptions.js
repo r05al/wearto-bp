@@ -41,13 +41,13 @@ class FilterOptions extends Component {
     }
 
     const looksSelection = datedLooks.map((look) => {
-      return <option key={look.id} value={look.id}>{look.title}</option>
+      return <option key={look.get('id')} value={look.get('id')}>{look.get('title')}</option>
     });
 
   	return(
 			<div className="filter-options">
         <div id="search" onClick={this.toggleFilter.bind(this)}>&#9740;</div>
-        <div className={this.state.showFilter ? "search-options search-options--is-open":"search-options"}>
+        <div className={this.state.showFilter ? 'search-options search-options--is-open':'search-options'}>
           <DatePicker selected={look.get('date')}
                       isClearable={true}
                       placeholderText='Select a date to filter by'
@@ -55,10 +55,10 @@ class FilterOptions extends Component {
                       popoverTargetAttachment='top center'
                       popoverTargetOffset='10px 50px'
                       onChange={this.handleDateChange.bind(this)} 
-                      style={{ flex: "2"}}/>
+                      style={{ flex: '2'}}/>
           <select id="savedLook"
                   value={look.get('id')}
-                  style={{ flex: "1"}}
+                  style={{ flex: '1'}}
                   onChange={this.handleSetLook.bind(this)}>
             <option value="">Build a Look</option>
             {looksSelection}

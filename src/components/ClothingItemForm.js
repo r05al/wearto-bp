@@ -1,7 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 
 class ClothingItemForm extends Component {
-
 	static propTypes = {
 		buttonLabel: PropTypes.string.isRequired,
 		draftItem: PropTypes.shape({

@@ -2,10 +2,10 @@ import { fromJS } from 'immutable';
 import { TOGGLE_LIST } from '../constants';
 
 const initialState = fromJS({
-	"jacket": false,
-	"shirt": false,
-	"pant": false,
-	"shoe": false
+	'jacket': false,
+	'shirt': false,
+	'pant': false,
+	'shoe': false
 });
 
 const listItems = (state = initialState, action) => {

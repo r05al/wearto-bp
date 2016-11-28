@@ -5,11 +5,6 @@ import { getClothingItem } from '../reducers';
 import { createDraft, updateDraft, updateClothingItem } from '../actions';
 
 class EditClothingItem extends Component {
-
-	componentWillMount() {
-		this.props.createDraft(this.props.item);	
-	}
-
 	static propTypes = {
 		draft: PropTypes.object,
 		item: PropTypes.object,
@@ -17,6 +12,10 @@ class EditClothingItem extends Component {
 		updateDraft: PropTypes.func.isRequired,
 		updateClothingItem: PropTypes.func.isRequired
 	};
+
+	componentWillMount() {
+		this.props.createDraft(this.props.item);	
+	}
 
 	handleChange(field, value) {
 		this.props.updateDraft(field, value);
