@@ -10,15 +10,15 @@ import {
 
 const defaultLook = () => {
   return fromJS({
-    "id" : "",
-    "title": "Configure your Look",
-    "description": "Select items and prepare yourself for what's coming",
-    "date": null,
-    "pieces": {
-                "jacket" : 0,
-                "shirt" : 0,
-                "pant" : 0,
-                "shoe" : 0
+    'id' : '',
+    'title': 'Configure your Look',
+    'description': 'Select items and prepare yourself for what\'s coming',
+    'date': null,
+    'pieces': {
+                'jacket' : 0,
+                'shirt' : 0,
+                'pant' : 0,
+                'shoe' : 0
               }
   });
 };
@@ -39,7 +39,10 @@ const lookDraft = (state = defaultLook(), action) => {
       return state.set('date', action.date);
     case UPDATE_CLOTHING_ITEM:
       if (state.get('pieces').includes(action.id)) {
-        return state.setIn(['pieces', action.itemDraft.get('type')], action.id)
+        const keyToClear = state.get('pieces').findKey((k) => k == action.id);
+        const keyToSet = action.itemDraft.get('type');
+        const clearedItem = state.setIn(['pieces', keyToClear], 0);
+        return clearedItem.setIn(['pieces', keyToSet], action.id);
       }
     case UPDATE_LOOK_DRAFT:
       return state.set(action.field, action.value);
