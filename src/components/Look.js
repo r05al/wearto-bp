@@ -10,13 +10,8 @@ class Look extends Component {
     deselect: PropTypes.func.isRequired
   };
 
-  handleDeselect(item) {
-    const itemType = item.get('type');
-    this.props.deselect(itemType);
-  }
-
   render() {
-    const { look, clothingItems } = this.props;
+    const { look, clothingItems, deselect } = this.props;
     const id = look.get('id');
     const pieces = look.get('pieces');
     const types = pieces.keySeq();
@@ -30,12 +25,12 @@ class Look extends Component {
       }
       const href = itemInfo.get('href');
       if (href && href.includes('placehold.it')) {
-        info = <span style={{textAlign: "center", width: "100%"}}>
+        info = <span style={{textAlign: 'center', width: '100%'}}>
                 {itemInfo.get('title')}
                </span>;
       }
     	return <div className="look-grid" key={type}
-									onClick={ this.handleDeselect.bind(this, itemInfo) }>
+									onClick={ deselect.bind(this, itemInfo) }>
                 <img src={href} />
 								{info}
 						 </div>

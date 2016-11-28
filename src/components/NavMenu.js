@@ -17,65 +17,65 @@ class NavMenu extends Component {
 
 		let backgroundStyle = {
 			zIndex: 1,
-			width: "100%",
-			height: "65px",
-			position: "fixed"
+			width: '100%',
+			height: '65px',
+			position: 'fixed'
 		}
 
 		let bottomStyle = {
-			height: "100%", width: "83%", 
-			margin: "0 auto",
-			backgroundColor: "#BDBDBD",
+			height: '100%', width: '83%', 
+			margin: '0 auto',
+			backgroundColor: '#BDBDBD',
 		}
 
 		let drawerTopStyle = {
-				height: "100%", width: "100%",
-				backgroundSize: "cover",
-				boxShadow: "inset 0 0 9em black",
-				position: "relative",
-				borderBottom: "black solid 4px"
+				height: '100%', width: '100%',
+				backgroundSize: 'cover',
+				boxShadow: 'inset 0 0 9em black',
+				position: 'relative',
+				borderBottom: 'black solid 4px'
 		}
 
 		let drawerFaceStyle = { 
-			height: "10%", 
-			width: "110%",
-			backgroundSize: "cover",			
-			boxShadow: "inset 0 0 6em black",
-			position: "absolute",
-			borderRadius: "6%",
-			left: "-5%",
-			bottom: "0%",
-			border: "black solid"
+			height: '10%', 
+			width: '110%',
+			backgroundSize: 'cover',			
+			boxShadow: 'inset 0 0 6em black',
+			position: 'absolute',
+			borderRadius: '6%',
+			left: '-5%',
+			bottom: '0%',
+			border: 'black solid'
 		}
 
 		let linkStyle = {
-			margin: "5% auto",
-			width: "70%",
-			textAlign: "center",
-			fontWeight: "900",
-			fontSize: "3em",
-			verticalAlign: "middle",
-			alignSelf: "center",
-			flex: "1"
+			margin: '5% auto',
+			width: '70%',
+			textAlign: 'center',
+			fontWeight: '900',
+			fontSize: '3em',
+			verticalAlign: 'middle',
+			alignSelf: 'center',
+			flex: '1'
 		}
 
 		return (
 			<div style={backgroundStyle}>
 				<div className="drawer-top" style={drawerTopStyle}>
 					<div id="nav" 
-							 className={this.state.showMenu ? "open" : ""}
+							 className={this.state.showMenu ? 'open' : ''}
 							 onClick={this.toggleMenu.bind(this)}>
 					  <span></span>
 					  <span></span>
 					  <span></span>
 					  <span></span>
 					</div>
-					<div className={this.state.showMenu ? "drawer" : "drawer drawer-active"}>
+					<div className={this.state.showMenu ? 'drawer' : 'drawer drawer-active'}>
 						<div className="drawer-inner" style={bottomStyle}>
-							<div className="links" style={{height: "80%", width: "83%", 
-																						position: "absolute", top: "0",
-																						display: "flex",
-																						flexDirection: "column"}}>
+							<div className="links" style={{height: '80%', width: '83%', 
+																						position: 'absolute', top: '0',
+																						display: 'flex',
+																						flexDirection: 'column'}}>
 								<div style={linkStyle}>
 									<Link to='/'>HOME</Link>
 								</div>
@@ -87,47 +87,45 @@ class NavMenu extends Component {
 								</div>
 							</div>
 							<div className="shadow" style={{
-								borderBottom: "15px solid #424242",
-								borderLeft: "25px solid transparent",
-								borderRight: "25px solid transparent",
-								height: "0",
-								width: "83%",
-								position: "absolute",
-								bottom: "17%"
+								borderBottom: '15px solid #424242',
+								borderLeft: '25px solid transparent',
+								borderRight: '25px solid transparent',
+								height: '0',
+								width: '83%',
+								position: 'absolute',
+								bottom: '17%'
 							}}>
 							</div>					
 							<div className="shadow-left" style={{
-								borderLeft: "25px solid #212121",
-								borderBottom: "16px solid transparent",
-								height: "83%",
-								width: "0%",
-								position: "absolute",
-								bottom: "17%",
-								left: "8.5%"
+								borderLeft: '25px solid #212121',
+								borderBottom: '16px solid transparent',
+								height: '83%',
+								width: '0%',
+								position: 'absolute',
+								bottom: '17%',
+								left: '8.5%'
 							}}>
 							</div>
 							<div className="shadow-right" style={{
-								borderRight: "25px solid #212121",
-								borderBottom: "16px solid transparent",
-								height: "83%",
-								width: "0%",
-								position: "absolute",
-								bottom: "17%",
-								right: "8.5%"
+								borderRight: '25px solid #212121',
+								borderBottom: '16px solid transparent',
+								height: '83%',
+								width: '0%',
+								position: 'absolute',
+								bottom: '17%',
+								right: '8.5%'
 							}}>
 							</div>
-							<div className="drawer-inner-edge" style={{ height: "7%", width: "83%",
-							backgroundColor: "#303030",
-							position: "absolute",
-							bottom: "10%"}}>
+							<div className="drawer-inner-edge" style={{ height: '7%', width: '83%',
+							backgroundColor: '#303030',
+							position: 'absolute',
+							bottom: '10%'}}>
 							</div>
 							<div className="drawer-inner-face" style={drawerFaceStyle}>
 							</div>							
-						</div>
-					
+						</div>				
 					</div>
 				</div>
-					
 			</div>
 		);
 	}

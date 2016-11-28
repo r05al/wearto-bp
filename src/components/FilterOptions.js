@@ -1,9 +1,6 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import DatePicker from 'react-datepicker';
 import { Link } from 'react-router';
-import { connect } from 'react-redux';
-import { getLook } from '../reducers';
-import { updateDate, setLook } from '../actions';
 
 class FilterOptions extends Component {
   constructor() {
@@ -13,23 +10,20 @@ class FilterOptions extends Component {
     }
   }
 
+  static propTypes = {
+    look: PropTypes.object.isRequired,
+    looks: PropTypes.object.isRequired,
+    setLook: PropTypes.func.isRequired,
+    updateDate: PropTypes.func.isRequired
+  }
+
   toggleFilter() {
     this.setState({ showFilter: !this.state.showFilter });
   }
 
-  handleSetLook(e) {
-    const lookId = e.target.value;
-    const look = getLook(this.props.looks, lookId);
-    this.props.setLook(look);
-  }
-
-  handleDateChange(date) {
-    this.props.updateDate(date);
-  }
-
   render() {
     let datedLooks;
-    const {look, looks} = this.props;
+    const {look, looks, setLook, updateDate } = this.props;
 
     if (look.get('date')) {
       datedLooks = looks.filter((l) => l.get('date'))
@@ -54,12 +48,12 @@ class FilterOptions extends Component {
                       popoverAttachment='bottom center'
                       popoverTargetAttachment='top center'
                       popoverTargetOffset='10px 50px'
-                      onChange={this.handleDateChange.bind(this)} 
+                      onChange={updateDate.bind(this)} 
                       style={{ flex: '2'}}/>
           <select id="savedLook"
                   value={look.get('id')}
                   style={{ flex: '1'}}
-                  onChange={this.handleSetLook.bind(this)}>
+                  onChange={setLook.bind(this)}>
             <option value="">Build a Look</option>
             {looksSelection}
           </select>
@@ -69,16 +63,4 @@ class FilterOptions extends Component {
   }
 }
 
-const mapStateToProps = (state) => (
-  {
-    look: state.lookDraft,
-    looks: state.looks,
-  }
-)
-
-const mapDispatchToProps = ({
-  updateDate,
-  setLook
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(FilterOptions);
+export default FilterOptions;

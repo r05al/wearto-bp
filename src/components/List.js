@@ -5,12 +5,12 @@ import { Link } from 'react-router';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 const navButtonStyle = {
-	position: "absolute",
+	position: 'absolute',
 	zIndex: 1,
-	top: "30%",
-	opacity: ".7",
-	cursor: "pointer",
-	fontSize: "4em"
+	top: '30%',
+	opacity: '.7',
+	cursor: 'pointer',
+	fontSize: '4em'
 }
 
 class LeftNavButton extends Component {
@@ -59,7 +59,7 @@ class List extends Component {
 	}
 
 	render() {
-		let { type, listItems } = this.props;
+		const { clothingItems, listItems, type } = this.props;
 		let nextNav = <RightNavButton />;
 		let prevNav = <LeftNavButton />;
 		let settings = {
@@ -73,7 +73,7 @@ class List extends Component {
 
 		let slider;
 		if (listItems.get(type)) {
-			const clothingItems = this.props.clothingItems
+			const itemsOfType = clothingItems
 			.filter((item) => item.get('type') === type)
 			.map((item) => {
   			let info, href = item.get('href'),
@@ -81,18 +81,18 @@ class List extends Component {
 
   			if (href.includes('placehold.it')) {
   				info = <span onClick={ this.handleSelect.bind(this, item) }
-			  							 style={{position: "absolute", left: 0, 
-			  							 				 textAlign: "center", width: "100%"}}>
+			  							 style={{position: 'absolute', left: 0, 
+			  							 				 textAlign: 'center', width: '100%'}}>
 			  					{item.get('title')}
 			  				</span>;
   			}
 
 	  		return (
 	  			<div className='clothing' key={ id }>
-	  				<div style={{width: "90%", margin: "0 auto"}}>
+	  				<div style={{width: '90%', margin: '0 auto'}}>
 		  				<img src={ href }
 									 onClick={ this.handleSelect.bind(this, item) }
-									 style={ item.get('available') ? {} : { filter: "opacity(50%)" }}/>
+									 style={ item.get('available') ? {} : { filter: 'opacity(50%)' }}/>
 							{ info }
 		  				<div className="item-edit"><Link to={`items/${id}/edit`}>✎</Link></div>
 		  				<div className="item-toggle" 
@@ -103,7 +103,7 @@ class List extends Component {
 	  		);
 	  	});
 
-		  slider = <Slider {...settings}>{clothingItems}</Slider>
+		  slider = <Slider {...settings}>{itemsOfType}</Slider>
 		}
 
     return (

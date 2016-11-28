@@ -25,9 +25,9 @@ class AddOptions extends Component {
 			  +
 			  <div className="add-options">
 			    <Link to='items/new' className={this.state.showAdd ?
-			    "add-button add-item" : "add-button"}>Item</Link>
+			    'add-button add-item' : 'add-button'}>Item</Link>
 			    <Link to='looks/new' className={this.state.showAdd ?
-			    "add-button add-look" : "add-button"}>Look</Link>
+			    'add-button add-look' : 'add-button'}>Look</Link>
 			  </div>
 			</div>
   	);
